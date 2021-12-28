@@ -1,0 +1,32 @@
+.checkout-item-container {
+     padding: 10px;
+     background-color: rgb(208, 235, 208);
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin: 10px;
+     border-radius: 10px;
+     .wrap1 {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 20px;
+          i {
+               color: rgb(243, 140, 140);
+               cursor: pointer;
+          }
+
+          img {
+               width: 80px;
+               border-radius: 10px;
+               object-fit: contain;
+               max-height: 70px;
+          }
+          .title {
+               max-width: 600px;
+          }
+     }
+     .price {
+          font-weight: bold;
+     }
+}

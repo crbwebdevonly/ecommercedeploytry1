@@ -1,0 +1,126 @@
+.price-range-container {
+     // background-color: red;
+     // border: 2px solid red;
+     // --c1: #ccccff;
+     // --c2: #6495ed;
+
+     min-width: 200px;
+     .title {
+          text-align: center;
+          font-size: 1rem;
+          font-weight: bold;
+          margin-bottom: 10px;
+          // background-color: turquoise;
+          color: rgb(74, 80, 74);
+     }
+
+     .main-wrap {
+          width: 100%;
+          // border: 2px solid black;
+          padding: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .range-container-1 {
+               // border: 2px solid red;
+               padding: 0px;
+               position: relative;
+               width: 100%;
+               height: 20px;
+
+               .track {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    margin: auto;
+                    height: 10px;
+                    width: 100%;
+                    // border: 1px solid blue;
+                    // background: linear-gradient(
+                    //      90deg,
+                    //      rgb(113, 243, 113) 70% rgb(233, 120, 120) 70%
+                    // );
+                    // overflow: hidden;
+                    border-radius: 10px;
+                    // z-index: 99;
+               }
+
+               .slide1 {
+                    width: 100%;
+                    height: 10px;
+                    appearance: none;
+                    position: absolute;
+                    background: transparent;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto;
+                    // z-index: -1;
+                    pointer-events: none;
+                    &::-webkit-slider-runnable-track {
+                         appearance: none;
+                         height: 10px;
+                    }
+
+                    &::-webkit-slider-thumb {
+                         appearance: none;
+                         height: 20px;
+                         width: 20px;
+                         background-color: rgb(61, 182, 5);
+                         background-color: #6495ed;
+                         // z-index: 99;
+                         margin-top: -20px;
+                         pointer-events: auto;
+                         pointer-events: auto;
+                         transform: rotateZ(45deg);
+                         border-radius: 40px 40px 0px 40px;
+                         cursor: pointer;
+                    }
+               }
+               .slide2 {
+                    width: 100%;
+                    height: 10px;
+                    appearance: none;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto;
+                    pointer-events: none;
+                    background: transparent;
+                    // z-index: -1;
+                    &::-webkit-slider-runnable-track {
+                         appearance: none;
+                         height: 10px;
+                    }
+
+                    &::-webkit-slider-thumb {
+                         appearance: none;
+                         height: 20px;
+                         width: 20px;
+                         background-color: rgb(231, 15, 202);
+                         background-color: #6495ed;
+                         // z-index: 99;
+                         margin-top: -20px;
+                         pointer-events: auto;
+                         transform: rotateZ(45deg);
+                         border-radius: 40px 40px 0px 40px;
+                         // border-radius: 50%;
+                         cursor: pointer;
+                    }
+               }
+          }
+     }
+     .values-wrap {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+          // background-color: yellow;
+          font-size: 0.81rem;
+          text-transform: capitalize;
+          padding: 5px;
+          span {
+               font-weight: bold;
+          }
+     }
+}

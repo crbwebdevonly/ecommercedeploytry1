@@ -1,0 +1,90 @@
+.basket-modal-container {
+     position: absolute;
+     top: 100%;
+     right: 0;
+     padding: 10px;
+     border-radius: 10px;
+     background-color: rgb(205, 229, 149);
+     list-style: none;
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+     gap: 20px;
+     width: max-content;
+     z-index: 999;
+     .close {
+          align-self: flex-end;
+          font-size: 1rem;
+          font-weight: bold;
+          cursor: pointer;
+          &:hover {
+               text-decoration: underline;
+          }
+     }
+     .items-wrap {
+          .item {
+               border-bottom: 1px solid grey;
+               padding: 5px;
+               display: flex;
+               justify-content: space-between;
+               align-items: center;
+               width: 100%;
+               &.header {
+                    font-weight: bold;
+                    // border-bottom: 1px solid grey;
+
+                    & > div {
+                         // border: 1px solid rgb(172, 157, 157);
+                         padding: 5px;
+                    }
+               }
+               .title {
+                    font-size: 1rem;
+                    // font-weight: bold;
+                    margin-right: 10px;
+                    text-transform: capitalize;
+                    padding: 5px;
+                    max-width: 200px;
+               }
+               .qty {
+                    // font-weight: bold;
+                    padding: 5px;
+                    margin-right: 10px;
+                    margin-left: auto;
+               }
+               .amount {
+                    padding: 5px;
+                    // margin-left: auto;
+               }
+               .remove {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    &:hover {
+                         filter: brightness(1.6);
+                    }
+                    .fas.fa-trash-alt {
+                         font-size: 12px;
+                         color: rgb(221, 80, 80);
+                         padding: 5px;
+                    }
+               }
+          }
+     }
+     .total {
+          padding: 5px;
+          margin-left: auto;
+          font-weight: bold;
+     }
+     .checkout-button {
+          padding: 10px;
+          text-align: center;
+          background-color: rgb(191, 245, 159);
+          border-radius: 10px;
+          cursor: pointer;
+          &:hover {
+               filter: brightness(0.8);
+          }
+     }
+}

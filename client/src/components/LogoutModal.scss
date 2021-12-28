@@ -1,0 +1,27 @@
+.logoutmodal-container {
+     // position: fixed;
+     position: absolute;
+     height: 100%;
+     width: 100%;
+     background-color: rgba(73, 70, 70, 0.644);
+     z-index: 999;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     .logout-button {
+          padding: 20px 80px;
+          font-size: 1.3rem;
+          border-radius: 10px;
+          outline: none;
+          border: none;
+          background-color: rgb(202, 58, 58);
+          cursor: pointer;
+          font-weight: bold;
+          color: white;
+
+          &:hover {
+               filter: brightness(1.5);
+          }
+     }
+}

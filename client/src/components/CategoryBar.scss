@@ -1,0 +1,41 @@
+.categorybar-container {
+     // background-color: red;
+     padding: 20px 10px;
+     display: flex;
+     gap: 10px;
+     background-color: rgb(248, 247, 237);
+
+     .card {
+          padding: 10px;
+          box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.384);
+          border-radius: 10px;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: flex-start;
+          background-color: rgb(244, 248, 244);
+          .title {
+               font-size: 1rem;
+               font-weight: bold;
+               padding: 10px 0;
+          }
+          .image-wrap {
+               width: 90%;
+               height: 60%;
+               margin: 0 auto;
+               border-radius: 10px;
+               overflow: hidden;
+               img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+               }
+          }
+          .desc-short {
+               font-size: 0.8rem;
+               line-height: 1.3rem;
+               padding: 10px 0;
+          }
+     }
+}

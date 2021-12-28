@@ -1,0 +1,74 @@
+.filterbar-container {
+     --c0: rgb(250, 244, 226);
+     --c1: rgb(241, 240, 229);
+
+     // border: 2px solid red;
+     padding: 5px;
+     background-color: rgb(250, 244, 226);
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     gap: 10px;
+
+     .search-wrap {
+          flex: 3;
+          padding: 15px;
+          // border: 1px solid green;
+          position: relative;
+          background-color: var(--c1);
+
+          input {
+               width: 100%;
+               outline: none;
+               border: none;
+               font-size: 1rem;
+               padding: 5px 10px;
+               &::placeholder {
+                    opacity: 0.4;
+               }
+          }
+          .fas {
+               position: absolute;
+               top: 50%;
+               right: 10px;
+               transform: translateY(-50%);
+               color: grey;
+          }
+     }
+     .range-container {
+          display: flex;
+          gap: 10px;
+          padding: 10px;
+          background-color: var(--c1);
+          .range-wrap {
+               display: flex;
+               flex-direction: column;
+               align-items: center;
+               input {
+                    width: 100%;
+               }
+          }
+     }
+     .select-wrap {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+          gap: 10px;
+          background-color: var(--c1);
+          label {
+               font-size: 1rem;
+               font-weight: bold;
+               color: rgb(121, 120, 114);
+               // padding: 10px;
+          }
+          option {
+               font-size: 0.9rem;
+               background-color: rgb(230, 230, 255);
+               &:hover {
+                    background-color: red;
+               }
+          }
+     }
+}

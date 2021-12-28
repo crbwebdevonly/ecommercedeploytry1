@@ -1,0 +1,32 @@
+.create-new-product-container {
+     // background-color: red;
+     padding: 20px;
+     background-color: rgb(235, 245, 235);
+
+     .inputs-wrap {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          width: 50%;
+          input {
+               font-size: 1rem;
+               padding: 5px;
+               outline: none;
+               border: none;
+               border-radius: 5px;
+               margin: 0 10px;
+               width: 300px;
+          }
+          button {
+               padding: 5px;
+               background-color: rgb(104, 179, 104);
+               cursor: pointer;
+               font-size: 1rem;
+               font-weight: bold;
+               color: rgb(44, 37, 37);
+               &:hover {
+                    filter: brightness(1.2);
+               }
+          }
+     }
+}
