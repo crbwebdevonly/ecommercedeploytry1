@@ -86,7 +86,9 @@ const OrderItem = (props) => {
                // nav("/adminpage/allorders");
                // window.location.reload();
                setUpdatedStatus(reply.data.status);
-          } catch (error) {}
+          } catch (error) {
+               console.log(error);
+          }
           // console.log(reply);
      };
      //======================================================

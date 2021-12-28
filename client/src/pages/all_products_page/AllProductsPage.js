@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { MyAxios } from "../../axios/MyAxios";
+import { MyAxios, myaxiox2 } from "../../axios/MyAxios";
 import CategoryBar from "../../components/CategoryBar";
 import FeaturedProducts from "../../components/FeaturedProducts";
 import FilterBar from "../../components/FilterBar";
@@ -16,6 +16,7 @@ const AllProductsPage = () => {
      //======================================================
      //======================================================
      const [sortPrice, setSortPrice] = useState(1);
+     const [category, setCategory] = useState("any");
      //======================================================
      const [itemsPerPage, setItemsPerPage] = useState(5);
      const [totalPages, setTotalPages] = useState(5);
@@ -35,7 +36,7 @@ const AllProductsPage = () => {
                );
                const LoggedInUserToken = loggedInUser?.token || "crb blank";
                const reply = await MyAxios.get(
-                    `/products?page=${page}&itemsPerPage=${itemsPerPage}&sortPrice=${sortPrice}`,
+                    `/products?page=${page}&itemsPerPage=${itemsPerPage}&sortPrice=${sortPrice}&category=${category}`,
                     {
                          // const reply = await MyAxios.get("/products", {
                          headers: {
@@ -43,7 +44,7 @@ const AllProductsPage = () => {
                          },
                     }
                );
-               console.log(reply.data);
+               // console.log(reply.data);
                setProducts(reply.data.allProducts);
                setTotalPages(Math.ceil(reply.data.count / itemsPerPage));
           };
@@ -53,7 +54,7 @@ const AllProductsPage = () => {
           return () => {
                // cleanup
           };
-     }, [sortPrice, itemsPerPage, page]);
+     }, [sortPrice, itemsPerPage, page, category]);
      //======================================================
      //======================================================
      useEffect(() => {
@@ -87,6 +88,22 @@ const AllProductsPage = () => {
      }, [user, nav]);
      //======================================================
      //======================================================
+     useEffect(() => {
+          // effect
+          // products/get-all-products-categories
+          const getCat = async () => {
+               const reply = await myaxiox2.post(
+                    "products/get-all-products-categories"
+               );
+               console.log(reply, "categories");
+          };
+          getCat();
+          return () => {
+               // cleanup
+          };
+     }, []);
+     //======================================================
+     //======================================================
      //======================================================
      const handleSortPriceChange = (e) => {
           setSortPrice(e.target.value);
@@ -94,7 +111,12 @@ const AllProductsPage = () => {
      //======================================================
      //======================================================
      //======================================================
-     console.log(totalPages, pageNumbersList, "totalpages");
+     // console.log(
+     //      totalPages,
+     //      pageNumbersList,
+     //      pageNumbersList[-1],
+     //      "totalpages"
+     // );
      //======================================================
      //======================================================
      return (
@@ -106,10 +128,11 @@ const AllProductsPage = () => {
                <div className="container-fluid border p-2">
                     <div className="row">
                          <div className="col">
-                              <ul class="pagination">
-                                   Items per page
+                              {/* <div className="col d-flex gap-2 align-items-center justify-content-end "> */}
+                              <ul class="pagination " id="scroll-to-top">
+                                   <div className="">Items per page</div>
                                    <select
-                                        className="form-select w-25 form-select-sm  text-capitalize "
+                                        className="form-select w-auto form-select-sm  text-capitalize me-2 "
                                         name=""
                                         id=""
                                         onChange={(e) => {
@@ -122,7 +145,7 @@ const AllProductsPage = () => {
                                         <option value={15}>15</option>
                                    </select>
                                    <li class="page-item disabled">
-                                        <a class="page-link">Previous</a>
+                                        <div class="page-link">Page</div>
                                    </li>
                                    {pageNumbersList.map((e) => (
                                         <li
@@ -144,13 +167,47 @@ const AllProductsPage = () => {
                                         </li>
                                    ))}
                                    <li class="page-item ">
-                                        <a class="page-link " href="#">
+                                        <button
+                                             class="page-link btn-primary "
+                                             onClick={() => {
+                                                  console.log("sss");
+                                                  setPage((p) =>
+                                                       p <
+                                                       pageNumbersList[
+                                                            pageNumbersList.length -
+                                                                 1
+                                                       ]
+                                                            ? p + 1
+                                                            : p
+                                                  );
+                                             }}
+                                        >
                                              Next
-                                        </a>
+                                        </button>
                                    </li>
                               </ul>
                          </div>
-                         {/* <div className="col">item1</div> */}
+                         <div className="col d-flex gap-2 align-items-center justify-content-end ">
+                              Select Category
+                              <select
+                                   className="form-select w-auto form-select-sm  text-capitalize me-2 d-inline "
+                                   name=""
+                                   id=""
+                                   value={category}
+                                   onChange={(e) => {
+                                        setCategory(e.target.value);
+                                   }}
+                                   // value={itemsPerPage}
+                              >
+                                   <option value="any">Any</option>
+                                   <option value="electronics">
+                                        Electronics
+                                   </option>
+                                   <option value="men">Men</option>
+                                   <option value="women">women</option>
+                                   <option value="jewelery">jewelery</option>
+                              </select>
+                         </div>
                          <div className="col d-flex gap-2 align-items-center justify-content-end ">
                               {/* <span className="">select2 this</span> */}
                               Sort by
@@ -174,6 +231,49 @@ const AllProductsPage = () => {
                {/*  */}
 
                {/*  */}
+               <ul className="pagination">
+                    <li class="page-item disabled">
+                         <div class="page-link">Page</div>
+                    </li>
+                    {pageNumbersList.map((e) => (
+                         <li
+                              className={
+                                   e === page
+                                        ? "page-item active "
+                                        : "page-item"
+                              }
+                         >
+                              <div
+                                   className="page-link btn "
+                                   onClick={() => {
+                                        setPage(e);
+                                   }}
+                                   // style={{ background: "blue" }}
+                              >
+                                   {e}
+                              </div>
+                         </li>
+                    ))}
+                    <li class="page-item ">
+                         <a
+                              href="#scroll-to-top"
+                              class="page-link btn-primary "
+                              onClick={() => {
+                                   console.log("sss");
+                                   setPage((p) =>
+                                        p <
+                                        pageNumbersList[
+                                             pageNumbersList.length - 1
+                                        ]
+                                             ? p + 1
+                                             : p
+                                   );
+                              }}
+                         >
+                              Next
+                         </a>
+                    </li>
+               </ul>
           </div>
      );
 };

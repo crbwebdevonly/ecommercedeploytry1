@@ -43,6 +43,7 @@ myServer.get(
 myServer.use("/auth", authRoute);
 myServer.use("/products", productsRoute);
 myServer.use("/order", orderRoute);
+myServer.use("/adminpage/order", orderRoute);
 
 //======================================================
 //======================================================

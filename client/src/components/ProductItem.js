@@ -17,6 +17,9 @@ const ProductItem = ({ product }) => {
                {/* product item */}
                <Link to={`/product/${product._id}`} className="link">
                     <div className="title">{product.title}</div>
+                    <div className="text-secondary">
+                         category: {product.category}
+                    </div>
                     <div className="image-wrap">
                          <img src={product.image} alt="" />
                     </div>

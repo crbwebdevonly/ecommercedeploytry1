@@ -14,21 +14,52 @@ router.get("/", verifyJWT, async (req, res) => {
      //      return res.status(200).json({ error: "is NOT ADMIN" });
      // }
      //
-     const count = await ProductDataModel.count();
-     console.log("query>>count", req.query, count);
-     if (req.query) {
-          console.log("query>>true");
+     if (req.query.category === "any") {
+          req.query.category = "";
      }
-     if (!req.query) {
-          console.log("query>>false");
+     let count = 0;
+     if (req.query.category === "men") {
+          count = await ProductDataModel.count({
+               $and: [
+                    { category: { $not: { $regex: "wom", $options: "i" } } },
+                    { category: { $regex: req.query.category, $options: "i" } },
+               ],
+          });
+     } else {
+          count = await ProductDataModel.count({
+               category: { $regex: req.query.category, $options: "i" },
+          });
      }
-     const allProducts = await ProductDataModel.find()
-          .sort({
-               price: req.query.sortPrice || 1,
-               // price: 1,
+
+     // console.log("query>>count", req.query, count);
+     // if (req.query) {
+     //      console.log("query>>true");
+     // }
+     // if (!req.query) {
+     //      console.log("query>>false");
+     // }
+     let allProducts = [];
+     if (req.query.category === "men") {
+          allProducts = await ProductDataModel.find({
+               $and: [
+                    { category: { $not: { $regex: "wom", $options: "i" } } },
+                    { category: { $regex: req.query.category, $options: "i" } },
+               ],
+               // category: { $not: { $regex: "wom", $options: "i" } },
+               // category: { $regex: req.query.category, $options: "i" },
+               // category:
           })
-          .skip(parseInt(req.query.itemsPerPage || 0) * (parseInt(req.query.page || 1)-1))
-          .limit(parseInt(req.query.itemsPerPage || 50));
+               .sort({
+                    price: req.query.sortPrice || 1,
+                    // price: 1,
+               })
+               .skip(
+                    parseInt(req.query.itemsPerPage || 0) *
+                         (parseInt(req.query.page || 1) - 1)
+               )
+               .limit(parseInt(req.query.itemsPerPage || 50));
+          return res.status(200).json({ allProducts, count });
+     }
      // const allProducts = await ProductDataModel.find({
      //      category: "electronics",
      // });
@@ -37,8 +68,29 @@ router.get("/", verifyJWT, async (req, res) => {
 
      // allProducts.test1="test123"
      // console.log(allProducts);
+     {
+          allProducts = await ProductDataModel.find({
+               category: { $regex: req.query.category, $options: "i" },
+          })
+               // $and: [
+               //      { category: { $not: { $regex: "wom", $options: "i" } } },
+               // ],
+               // category: { $not: { $regex: "wom", $options: "i" } },
+               // category: { $regex: req.query.category, $options: "i" },
+               // category:
+               // })
+               .sort({
+                    price: req.query.sortPrice || 1,
+                    // price: 1,
+               })
+               .skip(
+                    parseInt(req.query.itemsPerPage || 0) *
+                         (parseInt(req.query.page || 1) - 1)
+               )
+               .limit(parseInt(req.query.itemsPerPage || 50));
+     }
 
-     res.status(200).json({allProducts,count});
+     res.status(200).json({ allProducts, count });
 });
 //======================================================
 //======================================================
@@ -47,7 +99,7 @@ router.get("/", verifyJWT, async (req, res) => {
 //======================================================
 // get ONE products
 router.get("/:id", verifyJWT, async (req, res) => {
-     // console.log("hit999");
+     console.log("hit123A");
      if (!req.verifiedDecodedToken.findUser.isAdmin) {
           return res.status(200).json({ error: "is NOT ADMIN" });
      }
@@ -147,6 +199,23 @@ router.put("/:id", verifyJWT, async (req, res) => {
 //======================================================
 //======================================================
 //======================================================
+
+//======================================================
+//======================================================
+// send all product categories
+router.post("/get-all-products-categories", async (req, res) => {
+     // const ProductDataModel.find()
+     // console.log("hit123B");
+     // if (!req.verifiedDecodedToken.findUser.isAdmin) {
+     //      return res.status(200).json({ error: "is NOT ADMIN" });
+     // }
+     // //
+     // const product = await ProductDataModel.findById(req.params.id);
+     res.status(200).send("123abc");
+});
+//======================================================
+//======================================================
+
 //======================================================
 //======================================================
 
