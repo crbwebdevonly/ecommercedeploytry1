@@ -14,6 +14,9 @@ router.get("/", verifyJWT, async (req, res) => {
      //      return res.status(200).json({ error: "is NOT ADMIN" });
      // }
      //
+     if (!req.query.category) {
+          req.query.category = "";
+     }
      if (req.query.category === "any") {
           req.query.category = "";
      }
